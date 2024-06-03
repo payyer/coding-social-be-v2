@@ -7,26 +7,33 @@ import PreventLoginRoute from "./utils/PreventLoginRoute";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { RePassword } from "./pages/RePassword";
 import { SendVerifyCode } from "./pages/SendVerifyCode";
+import { Layout } from "./utils/Layout";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route element={<PrivateRoute />}>
-          {LinkPage.map((link) => {
-            return (
-              <Route key={link.link} path={link.link} element={link.element} />
-            );
-          })}
-        </Route>
-        <Route element={<PreventLoginRoute />}>
-          <Route element={<Login />} path="/login" />
-          <Route element={<VerifyAccount />} path="/verify" />
-          <Route element={<Register />} path="/register" />
-          <Route element={<RePassword />} path="/repassword" />
-          <Route element={<SendVerifyCode />} path="/sendVerifyCode" />
-        </Route>
-      </Routes>
+      <Layout>
+        <Routes>
+          <Route element={<PrivateRoute />}>
+            {LinkPage.map((link) => {
+              return (
+                <Route
+                  key={link.link}
+                  path={link.link}
+                  element={link.element}
+                />
+              );
+            })}
+          </Route>
+          <Route element={<PreventLoginRoute />}>
+            <Route element={<Login />} path="/login" />
+            <Route element={<VerifyAccount />} path="/verify" />
+            <Route element={<Register />} path="/register" />
+            <Route element={<RePassword />} path="/repassword" />
+            <Route element={<SendVerifyCode />} path="/sendVerifyCode" />
+          </Route>
+        </Routes>
+      </Layout>
     </BrowserRouter>
   );
 }

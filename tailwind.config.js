@@ -15,9 +15,24 @@ export default {
         "border": "#e5e7eb",
         "input-background": "#1c1f26"
       },
+      spacing: {
+        "nav-height": "var(--nav-height)"
+      }
     },
   },
-  plugins: [require('tailwind-scrollbar')({ preferredStrategy: 'pseudoelements' })],
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          "primary": "#00ADB5",
+          "secondary": '#393E46',
+          "white": '#fff',
+          "base-100": '#0e1216',
+        },
+      },
+    ],
+  },
+  plugins: [require('tailwind-scrollbar')({ preferredStrategy: 'pseudoelements' }), require('daisyui'),],
 
 }
 
