@@ -3,7 +3,7 @@ import { NavChatBoxItem } from "./NavChatBoxItem/NavChatBoxItem";
 
 export const NavChatBox = () => {
   return (
-    <div className="dropdown dropdown-end z-[11]">
+    <div className="hidden md:block dropdown dropdown-end z-[11]">
       <div tabIndex={0} role="button">
         <div className="relative bg-second-background rounded-full p-[12px]">
           <IoChatbox className="text-xl" />

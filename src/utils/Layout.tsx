@@ -5,6 +5,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { MyNavBar } from "../components/MyNavBar";
 import { ChatBox } from "../components/ChatBox";
+import { MediaModal } from "../components/MediaModal";
 interface LayoutProps {
   children: React.ReactNode; // Specify children of type React.ReactNode
 }
@@ -18,13 +19,14 @@ export const Layout = ({ children }: LayoutProps) => {
   };
 
   return (
-    <div>
-      <div className="layout relative bg-background">
+    <>
+      <div className="layout relative h-screen bg-background">
         {!shouldHideNavFooter() && <MyNavBar />}
         <Outlet /> {/* Placeholder for nested routes */}
         {children} {/* Render any additional content passed as props */}
-        <ChatBox />
       </div>
-    </div>
+      <ChatBox />
+      <MediaModal />
+    </>
   );
 };

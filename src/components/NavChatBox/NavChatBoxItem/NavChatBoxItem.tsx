@@ -1,8 +1,14 @@
 import { Avatar } from "../../Avatar";
+import { useAppDispatch } from "../../../store";
+import { isOpenChat } from "../../../reduce/home/homeSlice";
 
 export const NavChatBoxItem = () => {
+  const dispatch = useAppDispatch();
+  const handleCloseChatBox = () => {
+    dispatch(isOpenChat(true));
+  };
   return (
-    <li>
+    <li onClick={handleCloseChatBox}>
       <div className="flex flex-col">
         <div className="flex items-start gap-2">
           <Avatar height="h-12" />

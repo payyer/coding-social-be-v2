@@ -2,9 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { useDispatch, useSelector } from "react-redux";
 import { accountApi } from "./reduce/account/accountService";
+import homeReducer from "./reduce/home/homeSlice";
+import mediaModalReducer from "./reduce/mediaModal/mediaModalSlice";
 
 export const store = configureStore({
   reducer: {
+    home: homeReducer,
+    mediaModal: mediaModalReducer,
     [accountApi.reducerPath]: accountApi.reducer,
   },
   // Thêm midleware để enable các tính năng catching, invalidation, polling của RTK-query

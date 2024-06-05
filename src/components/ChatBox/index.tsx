@@ -1,15 +1,22 @@
 import { FaXmark } from "react-icons/fa6";
 import { Avatar } from "../Avatar";
 import { IoSend } from "react-icons/io5";
-import { useState } from "react";
-
+import { RootState, useAppDispatch, useAppSelector } from "../../store";
+import { isOpenChat } from "../../reduce/home/homeSlice";
 export const ChatBox = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dispatch = useAppDispatch();
+  const openChatBox = useAppSelector(
+    (state: RootState) => state.home.openChatBox
+  );
+
+  const handleCloseChatBox = () => {
+    dispatch(isOpenChat(false));
+  };
 
   return (
     <>
-      {isOpen && (
-        <div className="absolute h-[430px] w-[328px] bg-second-background bottom-0 right-20 z-[2]">
+      {openChatBox && (
+        <div className="fixed hidden md:block h-[430px] w-[328px] bg-second-background bottom-0 right-20 z-[2] shadow shadow-primary rounded-tl-lg rounded-tr-lg">
           {/* Header */}
           <div className="flex items-center justify-between px-2 h-14 border-b border-border">
             <div className="flex items-center gap-2">
@@ -21,7 +28,7 @@ export const ChatBox = () => {
                 <span className="text-sm">Đang hoạt động</span>
               </div>
             </div>
-            <div>
+            <div onClick={handleCloseChatBox}>
               <FaXmark className="text-2xl cursor-pointer hover:opacity-75" />
             </div>
           </div>

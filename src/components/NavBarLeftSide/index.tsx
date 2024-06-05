@@ -4,7 +4,7 @@ import { FcBriefcase } from "react-icons/fc";
 
 export const NavBarLeftSide = () => {
   return (
-    <div className="absolute top-nav-height h-screen w-60 border-border border-r">
+    <div className="hidden lg:block absolute top-nav-height h-screen w-60 border-border border-r">
       <ul className="mr-4 mt-4">
         <li className="flex items-center hover:bg-second-background px-2 py-1 rounded-lg cursor-pointer">
           <div className="flex items-center gap-2">
