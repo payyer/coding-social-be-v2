@@ -5,7 +5,6 @@ import {
   decreasesCurrentImage,
   increasesCurrentImage,
 } from "../../reduce/mediaModal/mediaModalSlice";
-import { FaXmark } from "react-icons/fa6";
 
 export const MediaModal = () => {
   const dispatch = useAppDispatch();

@@ -13,7 +13,7 @@ export const MyNavBar = () => {
         {/* <Burger /> */}
         <LogoCodingSocial />
         <div className=" flex mx-4  flex-1 sm:flex-none sm:w-[320px] md:w-[390px] lg:w-[500px]">
-          <SearchBar />
+          <SearchBar searchMode={1} />
         </div>
         <div className="flex items-center gap-3">
           <NavChatBox />

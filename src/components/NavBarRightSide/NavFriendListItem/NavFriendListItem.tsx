@@ -4,9 +4,10 @@ import { isOpenChat } from "../../../reduce/home/homeSlice";
 
 interface INavFriendListItem {
   isOnline: boolean;
+  name: string;
 }
 
-export const NavFriendListItem = ({ isOnline }: INavFriendListItem) => {
+export const NavFriendListItem = ({ isOnline, name }: INavFriendListItem) => {
   const dispatch = useAppDispatch();
   const handleCloseChatBox = () => {
     dispatch(isOpenChat(true));
@@ -18,7 +19,7 @@ export const NavFriendListItem = ({ isOnline }: INavFriendListItem) => {
     >
       <div className="flex items-center gap-2">
         <Avatar isOnline={isOnline} height="h-8" />
-        <p className="font-medium line-clamp-1">Jennie</p>
+        <p className="font-medium line-clamp-1">{name}</p>
       </div>
     </li>
   );

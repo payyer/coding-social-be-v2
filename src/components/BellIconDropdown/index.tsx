@@ -25,6 +25,9 @@ export const BellIconDropdown = () => {
         tabIndex={0}
         className="dropdown-content block p-0 mt-2 z-[1] rounded-tl-2xl rounded-bl-2xl rounded-r-non  menu shadow-sm shadow-primary bg-base-100  w-80 h-80 overflow-y-scroll scrollbar-thin scrollbar-thumb-primary scrollbar-track-secondary"
       >
+        <li className="px-4 py-4 text-center bg-background text-xl font-medium  border-b border-primary">
+          Thông báo
+        </li>
         <BellItemFriendRequest />
         <BellItemPostComment />
         <BellItemReplyComment />
@@ -32,6 +35,9 @@ export const BellIconDropdown = () => {
         <BellItemLikeComment />
         <BellItemPostShared />
         <BellItemApplications />
+        <li className="px-4 py-2 text-center bg-background font-medium  border-b border-primary hover:text-primary cursor-pointer">
+          Xem thêm
+        </li>
       </ul>
     </div>
   );

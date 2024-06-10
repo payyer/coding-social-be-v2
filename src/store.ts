@@ -1,19 +1,21 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { useDispatch, useSelector } from "react-redux";
-import { accountApi } from "./reduce/account/accountService";
 import homeReducer from "./reduce/home/homeSlice";
 import mediaModalReducer from "./reduce/mediaModal/mediaModalSlice";
+import { apiSlice } from "./reduce/apiSlice";
+import searchInputReducer from "./reduce/search/searchSlice";
 
 export const store = configureStore({
   reducer: {
     home: homeReducer,
     mediaModal: mediaModalReducer,
-    [accountApi.reducerPath]: accountApi.reducer,
+    searchInput: searchInputReducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
   },
   // Thêm midleware để enable các tính năng catching, invalidation, polling của RTK-query
   middleware(getDefaultMiddleware) {
-    return getDefaultMiddleware().concat(accountApi.middleware);
+    return getDefaultMiddleware().concat(apiSlice.middleware);
   },
 });
 

@@ -1,12 +1,3 @@
-import Cookies from "js-cookie";
-import {
-  BaseQueryFn,
-  FetchArgs,
-  FetchBaseQueryError,
-  createApi,
-  fetchBaseQuery,
-} from "@reduxjs/toolkit/query/react";
-
 import {
   ILoginRespone,
   ILogoutRespone,
@@ -17,49 +8,9 @@ import {
   IVerifyAccountResponse,
   IloginInput,
 } from "../../type/account";
+import { apiSlice } from "../apiSlice";
 
-// Tạo baseQuery
-const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:8000/api/v2/",
-  credentials: "include",
-  prepareHeaders: (headers) => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken) {
-      headers.set("accessToken", accessToken);
-    }
-    return headers;
-  },
-  method: "POST",
-});
-
-// Tạo custom query. Xem trên RTK query authentication with reauth hoặc youtube của ô Dave Gray
-const baseQueryWithReauth: BaseQueryFn<
-  string | FetchArgs,
-  unknown,
-  FetchBaseQueryError
-> = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions);
-  if (result.error && result.error.status === 403) {
-    // try to get a new token
-    const refreshResult = await baseQuery("/user/token", api, extraOptions);
-    console.log({ refreshResult });
-    if (refreshResult.data) {
-      console.log({ refreshRespone: refreshResult.data });
-      result = await baseQuery(args, api, extraOptions);
-    } else {
-      localStorage.removeItem("userId");
-      localStorage.removeItem("userName");
-      localStorage.removeItem("role");
-      Cookies.remove("accessToken");
-      Cookies.remove("refreshToken");
-    }
-  }
-  return result;
-};
-
-export const accountApi = createApi({
-  reducerPath: "accountApi",
-  baseQuery: baseQueryWithReauth,
+export const accountApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     login: build.mutation<ILoginRespone, IloginInput>({
       query(body) {
@@ -69,6 +20,7 @@ export const accountApi = createApi({
           body,
         };
       },
+      invalidatesTags: (_) => ["getFriendList"],
     }),
     register: build.mutation<IRegisterRespone, IRegisterInput>({
       query(body) {
@@ -91,7 +43,6 @@ export const accountApi = createApi({
     logout: build.mutation<ILogoutRespone, void>({
       query() {
         const userId = localStorage.getItem("userId");
-        console.log({ userId });
         return {
           url: "user/logout",
           method: "POST",
@@ -100,6 +51,9 @@ export const accountApi = createApi({
           },
         };
       },
+      invalidatesTags: (result, error, body) => [
+        { type: "getFriendList", id: "LIST" },
+      ],
     }),
     sendEmailVerifyCode: build.mutation<{ message: string }, string>({
       query(email) {
@@ -123,6 +77,7 @@ export const accountApi = createApi({
     }),
   }),
 });
+
 export const {
   useRegisterMutation,
   useVerifyAccountMutation,
