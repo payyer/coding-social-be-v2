@@ -39,7 +39,14 @@ export const SearchUser = ({ searchValue }: ISearchUser) => {
       {!isFetching && searchValue && (
         <div className="absolute w-full mt-4 rounded-lg shadow bg-background shadow-primary z-[11]">
           {data?.metadata?.map((item) => {
-            return <SearchItem name={item.user_name} key={item._id} />;
+            return (
+              <SearchItem
+                userId={item._id}
+                media={item.user_avatar}
+                name={item.user_name}
+                key={item._id}
+              />
+            );
           })}
           {/* {data && data?.metadata.length > 5 && (
 

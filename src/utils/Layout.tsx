@@ -6,6 +6,8 @@ import { Outlet, useLocation } from "react-router-dom";
 import { MyNavBar } from "../components/MyNavBar";
 import { ChatBox } from "../components/ChatBox";
 import { MediaModal } from "../components/MediaModal";
+import { PreviewPostMedia } from "../components/PreviewPostMedia/PreviewPostMedia";
+import { CreatePostModal } from "../components/CreatePostModal";
 interface LayoutProps {
   children: React.ReactNode; // Specify children of type React.ReactNode
 }
@@ -27,6 +29,8 @@ export const Layout = ({ children }: LayoutProps) => {
       </div>
       <ChatBox />
       <MediaModal />
+      <CreatePostModal />
+      <PreviewPostMedia />
     </>
   );
 };

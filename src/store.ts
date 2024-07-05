@@ -5,12 +5,16 @@ import homeReducer from "./reduce/home/homeSlice";
 import mediaModalReducer from "./reduce/mediaModal/mediaModalSlice";
 import { apiSlice } from "./reduce/apiSlice";
 import searchInputReducer from "./reduce/search/searchSlice";
+import profileReducer from "./reduce/profile/profileSlice";
+import postReducer from "./reduce/post/postSlice";
 
 export const store = configureStore({
   reducer: {
     home: homeReducer,
     mediaModal: mediaModalReducer,
     searchInput: searchInputReducer,
+    profile: profileReducer,
+    post: postReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   // Thêm midleware để enable các tính năng catching, invalidation, polling của RTK-query

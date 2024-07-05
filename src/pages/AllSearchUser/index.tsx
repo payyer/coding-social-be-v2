@@ -5,8 +5,11 @@ import {
   useSearchUserQuery,
 } from "../../reduce/home/homeService";
 import { RootState, useAppSelector } from "../../store";
+import { useNavigate } from "react-router-dom";
+import { SendFriendReqBtn } from "../../components/SendFriendReqBtn";
 
 export const AllSearchUser = () => {
+  const navigate = useNavigate();
   const searchValue = useAppSelector(
     (state: RootState) => state.searchInput.searchUserInput
   );
@@ -39,11 +42,20 @@ export const AllSearchUser = () => {
             {data?.metadata.map((user) => {
               return (
                 <div className="flex py-2 gap-2 border-b border-border last:border-none">
-                  <Avatar height="h-12" />
+                  <Avatar
+                    userId={user._id}
+                    media={user.user_avatar}
+                    height="h-12"
+                  />
                   <div className="flex flex-1 items-center justify-between ">
-                    <p className="line-clamp-1 font-medium hover:underline cursor-pointer">
+                    <p
+                      onClick={() => navigate(`/profile/${user._id}`)}
+                      className="line-clamp-1 font-medium hover:underline cursor-pointer"
+                    >
                       {user.user_name}
                     </p>
+
+                    {/* Nút hiện thĩ khi đã là bạn b2 */}
                     {user.isFriend && (
                       <button
                         disabled
@@ -52,19 +64,12 @@ export const AllSearchUser = () => {
                         Đã là bạn bè
                       </button>
                     )}
-                    {!user.isFriend && !user.isRequest && (
-                      <button
-                        onClick={() => sendFriendRequest(user._id)}
-                        className="px-2 bg-secondary font-medium py-1 rounded-lg hover:bg-primary hover:text-black"
-                      >
-                        Thêm bạn
-                      </button>
-                    )}
-
-                    {!user.isFriend && user.isRequest && (
-                      <button className="px-2 bg-secondary font-medium py-1 rounded-lg hover:bg-primary hover:text-black">
-                        Đã gửi lời mời kết bạn
-                      </button>
+                    {/* Nút kết bạn khi chưa là bạn bè */}
+                    {!user.isFriend && (
+                      <SendFriendReqBtn
+                        receiverId={user._id}
+                        isRequestinit={user.isRequest}
+                      />
                     )}
                   </div>
                 </div>

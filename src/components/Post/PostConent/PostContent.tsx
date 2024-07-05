@@ -1,9 +1,10 @@
-export const PostContent = () => {
+import { IPostItem } from "../../../type/post";
+
+interface IPostContent {
+  postItem: IPostItem | undefined;
+}
+export const PostContent = ({ postItem }: IPostContent) => {
   return (
-    <article className="my-2 text-pretty">
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum vero autem
-      veritatis hic enim repudiandae cupiditate quae error, harum, natus iure!
-      Obcaecati totam, cupiditate error ad id in asperiores quidem?
-    </article>
+    <article className="my-2 text-pretty">{postItem?.post_content}</article>
   );
 };

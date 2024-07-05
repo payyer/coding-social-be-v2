@@ -1,8 +1,23 @@
+import { IPostItem } from "../../type/post";
+import { IGetUserInfoRespone, Media } from "../../type/profile";
+
 interface IAvatarProps {
   height?: string;
   isOnline?: boolean;
+  data?: IGetUserInfoRespone | undefined;
+  postData?: IPostItem;
+  media?: Media;
+  userId?: string;
 }
-export const Avatar = ({ height, isOnline }: IAvatarProps) => {
+export const Avatar = ({
+  height,
+  isOnline,
+  data,
+  postData,
+  media,
+  userId,
+}: IAvatarProps) => {
+  console.log({ media });
   return (
     <div
       className={`${
@@ -10,7 +25,9 @@ export const Avatar = ({ height, isOnline }: IAvatarProps) => {
       } avatar`}
     >
       <div className={`${height ? height : "h-24"}  rounded-full`}>
-        <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+        {postData && !data && <img src={postData?.user_id.user_avatar.url} />}
+        {!postData && data && <img src={data?.metadata.user_avatar.url} />}
+        {media && <img src={media.url} />}
       </div>
     </div>
   );

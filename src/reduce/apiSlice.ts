@@ -50,5 +50,11 @@ const baseQueryWithReauth: BaseQueryFn<
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({}),
-  tagTypes: ["getFriendList"],
+  tagTypes: [
+    "getFriendList",
+    "postOfUser",
+    "allPost",
+    "getFriendReq",
+    "friendListOfUser",
+  ],
 });

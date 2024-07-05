@@ -4,6 +4,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js",
   ],
   theme: {
     extend: {
@@ -16,7 +17,8 @@ export default {
         "input-background": "#1c1f26"
       },
       spacing: {
-        "nav-height": "var(--nav-height)"
+        "nav-height": "var(--nav-height)",
+        "modal-height": "calc(100vh - var(--nav-height))"
       }
     },
   },

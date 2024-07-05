@@ -1,9 +1,10 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { Media } from "../../type/profile";
 
 interface IMediaModalState {
   openMediaModal: boolean;
   currentImage: number;
-  imageList: Array<string>;
+  imageList: Media[];
 }
 
 const initialState: IMediaModalState = {
@@ -21,7 +22,7 @@ const mediaModalSlice = createSlice({
       action: PayloadAction<{
         openMediaModal: boolean;
         currentImage: number;
-        imageList: Array<string>;
+        imageList: Media[];
       }>
     ) => {
       state.imageList = action.payload.imageList;

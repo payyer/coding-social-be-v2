@@ -16,7 +16,7 @@ export const ChatBox = () => {
   return (
     <>
       {openChatBox && (
-        <div className="fixed hidden md:block h-[430px] w-[328px] bg-second-background bottom-0 right-20 z-[2] shadow shadow-primary rounded-tl-lg rounded-tr-lg">
+        <div className="fixed hidden md:block h-[430px] w-[328px] bg-second-background bottom-0 right-20 z-[100] shadow shadow-primary rounded-tl-lg rounded-tr-lg">
           {/* Header */}
           <div className="flex items-center justify-between px-2 h-14 border-b border-border">
             <div className="flex items-center gap-2">

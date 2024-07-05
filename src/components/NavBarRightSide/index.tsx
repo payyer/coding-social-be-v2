@@ -9,7 +9,7 @@ export const NavBarRightSide = () => {
     (state: RootState) => state.searchInput.searchFriendInput
   );
   const { data, isFetching } = useGetFriendListQuery(query);
-
+  console.log({ data });
   return (
     <div className="hidden lg:block absolute right-4 top-nav-height h-screen w-60 border-border border-l ">
       <div className="mt-4 mx-4 ">
@@ -23,6 +23,7 @@ export const NavBarRightSide = () => {
                 key={friend._id}
                 isOnline
                 name={friend.user_name}
+                user_avartar={friend.user_avatar}
               />
             );
           })}
