@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Avatar } from "../../../components/Avatar";
 import { IChatRoom } from "../../../type/charRoom";
+
 interface IListChatProps {
   chatItem: IChatRoom;
 }
@@ -21,10 +22,16 @@ export const ListChat = ({ chatItem }: IListChatProps) => {
       ? chatItem.members[1]
       : chatItem.members[0];
   //   const chatRoomId = chatItem._id;
-
+  const joinRoom = () => {
+    navigate(`/messages/${chatItem._id}`);
+    // socket.emit("join_room", {
+    //   user_name: chatWith.user_name,
+    //   chatRoomId: chatItem._id,
+    // });
+  };
   return (
     <div
-      onClick={() => navigate(`/messages/${chatItem._id}`)}
+      onClick={joinRoom}
       className="p-4 hover:bg-second-background rounded-md cursor-pointer"
     >
       <div className="flex flex-col">
