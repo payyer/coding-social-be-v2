@@ -1,10 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { Avatar } from "../../../components/Avatar";
 import { IChatRoom } from "../../../type/charRoom";
+import io from "socket.io-client";
 
 interface IListChatProps {
   chatItem: IChatRoom;
 }
+const socket = io("http://localhost:8000/");
+socket.on("connect", () => {
+  console.log(socket.id);
+});
+
 export const ListChat = ({ chatItem }: IListChatProps) => {
   const currentUser = localStorage.getItem("userId");
   const navigate = useNavigate();
@@ -24,10 +30,10 @@ export const ListChat = ({ chatItem }: IListChatProps) => {
   //   const chatRoomId = chatItem._id;
   const joinRoom = () => {
     navigate(`/messages/${chatItem._id}`);
-    // socket.emit("join_room", {
-    //   user_name: chatWith.user_name,
-    //   chatRoomId: chatItem._id,
-    // });
+    socket.emit("joinRoom", {
+      user_name: chatWith.user_name,
+      chatRoomId: chatItem._id,
+    });
   };
   return (
     <div

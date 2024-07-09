@@ -7,7 +7,6 @@ import { apiSlice } from "./reduce/apiSlice";
 import searchInputReducer from "./reduce/search/searchSlice";
 import profileReducer from "./reduce/profile/profileSlice";
 import postReducer from "./reduce/post/postSlice";
-import socketReducer from "./reduce/socket/socketSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,7 +15,6 @@ export const store = configureStore({
     searchInput: searchInputReducer,
     profile: profileReducer,
     post: postReducer,
-    socket: socketReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   // Thêm midleware để enable các tính năng catching, invalidation, polling của RTK-query

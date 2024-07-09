@@ -15,3 +15,11 @@ export interface IChatRoomMember {
     user_name: string,
     user_avatar: Media
 }
+
+export interface ICreateChatRoomRespone {
+    message: string,
+    metadata: {
+        _id: string,
+        members: string[],
+    }
+}

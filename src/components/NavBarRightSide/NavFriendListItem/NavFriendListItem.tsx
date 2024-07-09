@@ -2,21 +2,42 @@ import { Avatar } from "../../Avatar";
 import { useAppDispatch } from "../../../store";
 import { isOpenChat } from "../../../reduce/home/homeSlice";
 import { Media } from "../../../type/profile";
+import { useCreateChatRoomMutation } from "../../../reduce/chatRoom/chatRoomApi";
 
 interface INavFriendListItem {
   isOnline: boolean;
   name: string;
   user_avartar: Media;
+  userId: string;
 }
 
 export const NavFriendListItem = ({
   isOnline,
   name,
   user_avartar,
+  userId,
 }: INavFriendListItem) => {
+  const [createChatRoom] = useCreateChatRoomMutation();
+
   const dispatch = useAppDispatch();
   const handleCloseChatBox = () => {
-    dispatch(isOpenChat(true));
+    // Create chatRoom
+    createChatRoom(userId)
+      .then((res) => {
+        dispatch(
+          isOpenChat({
+            openChatBox: true,
+            userChatId: userId,
+            chatRoomId: res.data?.metadata._id,
+            user_name: name,
+            user_avartar: user_avartar,
+          })
+        );
+        console.log({ res });
+      })
+      .catch((error) => {
+        console.log({ error });
+      });
   };
   return (
     <li

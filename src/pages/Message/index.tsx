@@ -10,14 +10,22 @@ import {
 import { useParams } from "react-router-dom";
 import { ListChat } from "./ListChat/ListChat";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ICreateMessage } from "../../type/messages";
+import { ICreateMessage, IMessage } from "../../type/messages";
+import io from "socket.io-client";
+import { useEffect, useState } from "react";
 
+const socket = io("http://localhost:8000/");
+socket.on("connect", () => {
+  console.log(socket.id);
+});
 export const Message = () => {
   const { chatRoomId } = useParams();
   const { data: ListRoomChat } = useGetChatRoomsQuery();
-  const { data: GetMessages } = useGetMessagesQuery(chatRoomId ?? "");
+  const { data: GetMessages, refetch } = useGetMessagesQuery(chatRoomId ?? "");
   const [createMessage] = useCreateMessageMutation();
+  const userId = localStorage.getItem("userId");
 
+  const [newMessage, setNewMessage] = useState<IMessage[]>([]);
   const {
     register,
     handleSubmit,
@@ -26,12 +34,26 @@ export const Message = () => {
   const onSubmit: SubmitHandler<ICreateMessage> = (data) => {
     createMessage(data)
       .then((result) => {
+        socket.emit("sendMessage", { userId, chatRoomId, text: data.text });
         console.log({ result });
       })
       .catch((error) => {
         console.log({ error });
       });
   };
+
+  useEffect(() => {
+    socket.emit("joinRoom", { userId, chatRoomId });
+
+    socket.on("receiveMessage", ({ _id, senderId, text }) => {
+      console.log({ _id, senderId, text });
+      const newObjectMessage = { _id, senderId, text };
+      setNewMessage((prevMessages) => [...prevMessages, newObjectMessage]);
+    });
+    return () => {
+      socket.off("receiveMessage");
+    };
+  }, [chatRoomId, userId, refetch]);
 
   return (
     <section className="flex w-full pt-nav-height mx-auto h-screen">
@@ -53,6 +75,12 @@ export const Message = () => {
               }
               return <ChatBubbleStart key={item._id} message={item.text} />;
             })}
+          {newMessage.map((message) => {
+            if (message.senderId == localStorage.getItem("userId")) {
+              return <ChatBubbleEnd key={message._id} message={message.text} />;
+            }
+            return <ChatBubbleStart key={message._id} message={message.text} />;
+          })}
         </div>
         {/* Chat box input */}
         <div className="">

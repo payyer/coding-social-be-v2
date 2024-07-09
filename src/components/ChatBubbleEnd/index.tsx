@@ -4,7 +4,7 @@ interface IChatBubbleEndProps {
 export const ChatBubbleEnd = ({ message }: IChatBubbleEndProps) => {
   return (
     <div className="chat chat-end">
-      <div className="chat-bubble bg-second-background">{message}</div>
+      <div className={`chat-bubble ${"bg-primary text-black"} `}>{message}</div>
     </div>
   );
 };

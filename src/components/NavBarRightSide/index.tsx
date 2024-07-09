@@ -21,6 +21,7 @@ export const NavBarRightSide = () => {
             return (
               <NavFriendListItem
                 key={friend._id}
+                userId={friend._id}
                 isOnline
                 name={friend.user_name}
                 user_avartar={friend.user_avatar}

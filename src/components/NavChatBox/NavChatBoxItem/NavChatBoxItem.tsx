@@ -9,16 +9,8 @@ interface INavChatBoxItemProps {
 export const NavChatBoxItem = ({ chatItem }: INavChatBoxItemProps) => {
   const dispatch = useAppDispatch();
   const handleCloseChatBox = () => {
-    dispatch(isOpenChat(true));
+    dispatch(isOpenChat({ openChatBox: false }));
   };
-  // const currentUser = localStorage.getItem("userId");
-
-  // if (!chatItem || !chatItem.members || chatItem.members.length < 2 || !currentUser) {
-  //    return null; // or some fallback UI
-  // }
-
-  // const chatWith = chatItem.members[0]._id === currentUser ? chatItem.members[1] : chatItem.members[0];
-  // const chatRoomId = chatItem._id
   return (
     <li
       className="hover:bg-second-background cursor-pointer rounded-md"
