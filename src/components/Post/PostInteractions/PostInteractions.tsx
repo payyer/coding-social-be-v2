@@ -5,6 +5,7 @@ import {
   useLikePostMutation,
   useUnLikePostMutation,
 } from "../../../reduce/post/postService";
+import { CommentPost } from "../CommentPost/CommentPost";
 
 interface PostInteractions {
   postItem: IPostItem | undefined;
@@ -75,7 +76,11 @@ export const PostInteractions = ({ postItem }: PostInteractions) => {
           </p>
         </button>
       </div>
-      {isOpenComment && <div className="">Bình luận</div>}
+      {isOpenComment && postItem && (
+        <div className="">
+          <CommentPost postId={postItem?._id} />
+        </div>
+      )}
     </div>
   );
 };

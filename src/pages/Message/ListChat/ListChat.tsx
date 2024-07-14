@@ -1,7 +1,8 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Avatar } from "../../../components/Avatar";
 import { IChatRoom } from "../../../type/charRoom";
 import io from "socket.io-client";
+import { useEffect } from "react";
 
 interface IListChatProps {
   chatItem: IChatRoom;
@@ -12,7 +13,9 @@ socket.on("connect", () => {
 });
 
 export const ListChat = ({ chatItem }: IListChatProps) => {
+  const activeId = useParams();
   const currentUser = localStorage.getItem("userId");
+
   const navigate = useNavigate();
   if (
     !chatItem ||
@@ -35,10 +38,14 @@ export const ListChat = ({ chatItem }: IListChatProps) => {
       chatRoomId: chatItem._id,
     });
   };
+  useEffect(() => {}, [activeId, chatItem]);
+
   return (
     <div
       onClick={joinRoom}
-      className="p-4 hover:bg-second-background rounded-md cursor-pointer"
+      className={`p-4 hover:bg-second-background rounded-md cursor-pointer ${
+        activeId.chatRoomId == chatWith._id ? "bg-second-background" : ""
+      }`}
     >
       <div className="flex flex-col">
         <div className="flex items-start gap-2">

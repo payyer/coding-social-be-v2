@@ -56,5 +56,6 @@ export const apiSlice = createApi({
     "allPost",
     "getFriendReq",
     "friendListOfUser",
+    "resetComment"
   ],
 });
