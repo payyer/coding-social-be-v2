@@ -8,6 +8,7 @@ interface IAvatarProps {
   postData?: IPostItem;
   media?: Media;
   userId?: string;
+  jobMedia?: string;
 }
 export const Avatar = ({
   height,
@@ -15,6 +16,7 @@ export const Avatar = ({
   data,
   postData,
   media,
+  jobMedia,
 }: IAvatarProps) => {
   return (
     <div
@@ -26,6 +28,7 @@ export const Avatar = ({
         {postData && !data && <img src={postData?.user_id.user_avatar.url} />}
         {!postData && data && <img src={data?.metadata.user_avatar.url} />}
         {media && <img src={media.url} />}
+        {jobMedia && <img src={jobMedia} />}
       </div>
     </div>
   );

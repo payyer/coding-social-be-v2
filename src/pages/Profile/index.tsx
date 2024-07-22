@@ -15,6 +15,7 @@ import {
 } from "../../reduce/profile/profileService";
 import { useParams } from "react-router-dom";
 import { FaRegImage } from "react-icons/fa";
+import { Video } from "./Video/Video";
 
 export const Profile = () => {
   const view = useAppSelector((state: RootState) => state.profile.view);
@@ -50,6 +51,7 @@ export const Profile = () => {
         </div>
       )}
       {view == StateView.Image && <ProfileImage />}
+      {view == StateView.Video && <Video />}
       {view == StateView.Friend && <FriendList />}
       {view == StateView.Info && <UserInfo data={userData} />}
       <ImageModal />

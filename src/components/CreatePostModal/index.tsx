@@ -107,16 +107,6 @@ export const CreatePostModal = () => {
               <Divider />
 
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="flex justify-between items-center">
-                  <h3 className="">Chế độ xem:</h3>
-                  <select
-                    className="my-2 rounded-lg px-2 py-[2px] bg-background"
-                    {...register("postType")}
-                  >
-                    <option value="public">Xã hội</option>
-                    <option value="private">Cá nhân</option>
-                  </select>
-                </div>
                 <div className="flex flex-col gap-2 mb-4">
                   <label htmlFor="user_bio" className="flex-1">
                     Bio:

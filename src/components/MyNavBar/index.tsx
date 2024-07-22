@@ -35,9 +35,7 @@ export const MyNavBar = () => {
             <NavBarLeftSide data={data} />
             <NavBarRightSide />
           </>
-        ) : (
-          ""
-        )}
+        ) : null}
       </div>
     </>
   );

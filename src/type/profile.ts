@@ -75,3 +75,8 @@ export interface ICreatePostRespone {
     post_type: string;
   };
 }
+
+export interface IGetImage {
+  message: string,
+  metadata: Media[]
+}

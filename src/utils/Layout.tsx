@@ -1,7 +1,3 @@
-// import Navbar from './components/navbar/Navbar';
-// import { GoMoveToTop } from "react-icons/go";
-// import Footer from './components/footer/Footer';
-// import { useEffect } from 'react';
 import { Outlet, useLocation } from "react-router-dom";
 import { MyNavBar } from "../components/MyNavBar";
 import { ChatBox } from "../components/ChatBox";
@@ -16,7 +12,13 @@ export const Layout = ({ children }: LayoutProps) => {
   const location = useLocation();
 
   const shouldHideNavFooter = () => {
-    const hideOnPaths = ["/login", "/register", "/404"]; // Array of paths to hide on
+    const hideOnPaths = [
+      "/login",
+      "/register",
+      "/404",
+      "/sendVerifyCode",
+      "/verify",
+    ]; // Array of paths to hide on
     return hideOnPaths.some((path) => location.pathname.startsWith(path));
   };
 

@@ -25,16 +25,31 @@ export const NavBarLeftSide = ({ data }: INavBarLefSideProps) => {
             <p className="font-bold">{userName}</p>
           </div>
         </li>
-        <li className="hover:bg-second-background px-2 py-2 rounded-lg cursor-pointer">
+        <li
+          onClick={() => navigate(`/profile/${userId}`)}
+          className="hover:bg-second-background px-2 py-2 rounded-lg cursor-pointer"
+        >
           <div className="flex items-center gap-2">
             <FaUserFriends className="text-xl text-primary" />
             <p className="font-bold">Bạn bè</p>
           </div>
         </li>
         <li className="hover:bg-second-background px-2 py-2 rounded-lg cursor-pointer">
-          <div className="flex items-center gap-2">
+          <div
+            onClick={() => navigate(`/job/0`)}
+            className="flex items-center gap-2"
+          >
             <FcBriefcase className="text-xl text-primary" />
             <p className="font-bold">Công việc 🔥</p>
+          </div>
+        </li>
+        <li className="hover:bg-second-background px-2 py-2 rounded-lg cursor-pointer">
+          <div
+            onClick={() => navigate(`/applications`)}
+            className="flex items-center gap-2"
+          >
+            <FcBriefcase className="text-xl text-primary" />
+            <p className="font-bold">Quản lý đơn</p>
           </div>
         </li>
       </ul>

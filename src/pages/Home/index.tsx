@@ -17,15 +17,14 @@ export const Home = () => {
           <div className="my-4">
             <BtnCreatePost />
           </div>
-          {!isFetching &&
-            AllPost?.metadata.map((post) => {
-              return (
-                <div className="mb-4">
-                  <Post key={post._id} postItem={post} />
-                </div>
-              );
-            })}
-          {isFetching && <PostSkeleton />}
+          {AllPost?.metadata.map((post) => {
+            return (
+              <div className="mb-4">
+                <Post key={post._id} postItem={post} />
+              </div>
+            );
+          })}
+          {/* {isFetching && <PostSkeleton />} */}
         </div>
       </div>
     </div>

@@ -1,12 +1,18 @@
 import { IFriendRespone } from "../../type/friendReqeust";
 import { IPostRespone } from "../../type/post";
-import { ICreatePostRespone, IGetUserInfoRespone } from "../../type/profile";
+import { ICreatePostRespone, IGetImage, IGetUserInfoRespone } from "../../type/profile";
 import { apiSlice } from "../apiSlice";
 
 export const profileApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     getUserInfo: build.query<IGetUserInfoRespone, string | null>({
       query: (body) => `user/userInfo/${body}`,
+    }),
+    getImage: build.query<IGetImage, void>({
+      query: () => `user/image`,
+    }),
+    getVideo: build.query<IGetImage, void>({
+      query: () => `user/video`,
     }),
 
     getPostOfUser: build.query<IPostRespone, string | null>({
@@ -69,6 +75,10 @@ export const profileApi = apiSlice.injectEndpoints({
           body,
         };
       },
+      invalidatesTags: (result, error, body) => [
+        { type: "postOfUser", id: "POST" },
+        { type: "allPost", id: "ALL_POST" },
+      ],
     }),
 
     rejectFriendRequest: build.mutation<void, string>({
@@ -113,4 +123,6 @@ export const {
   useRejectFriendRequestMutation,
   useGetFriendListOfUserQuery,
   useUnFriendMutation,
+  useGetImageQuery,
+  useGetVideoQuery
 } = profileApi;
